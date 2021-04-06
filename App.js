@@ -1,10 +1,11 @@
 import React from 'react'
 import {StyleSheet} from 'react-native'
 import {Colors} from 'react-native/Libraries/NewAppScreen'
-import { NavigationContainer } from '@react-navigation/native';
+import { NavigationContainer } from '@react-navigation/native'
 import {createStackNavigator} from '@react-navigation/stack'
 import HomeScreen from './src/sreens/HomeScreen'
-import EMOMScreen from './src/sreens/EMOMScreen';
+import EMOMScreen from './src/sreens/EMOMScreen'
+import IsometriaScreen from './src/sreens/IsometriaScreen'
 
 const Stack = createStackNavigator()
 
@@ -14,6 +15,7 @@ export default AppNavigator = () => {
       <Stack.Navigator initialRouteName="Home">
         <Stack.Screen name="Home" component={HomeScreen} />
         <Stack.Screen name="EMOM" component={EMOMScreen} />
+        <Stack.Screen name="Isometria" component={IsometriaScreen} />
       </Stack.Navigator>    
     </NavigationContainer>
   )
