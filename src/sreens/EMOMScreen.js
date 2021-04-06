@@ -115,7 +115,7 @@ class EMOMScreen extends Component {
               :
               null
             }
-              <TouchableOpacity style={{ alignSelf: 'center', alignContent: 'flex-end', marginBottom:'40'}} onPress={()=> this.stop()}>
+              <TouchableOpacity style={{ alignSelf: 'center', alignContent: 'flex-end'}} onPress={()=> this.stop()}>
                 <Image source={require('../../assets/btn-stop.png')}/>
               </TouchableOpacity>
               </View>        
