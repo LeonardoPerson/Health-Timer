@@ -10,7 +10,7 @@ class BackgroundProgress extends Component {
   componentDidUpdate(prevProps){
     if(prevProps.percentage !== this.props.percentage){
       Animated.timing(this.height, {
-        toValue: this.props.percentage,
+        toValue: this.props.percentage > 100 ? 100 : this.props.percentage,
         duration: 500
       }).start()
     }
