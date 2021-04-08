@@ -21,9 +21,6 @@ export default AppNavigator = () => {
   )
 }
 
-
-
-
 const styles = StyleSheet.create({
   scrollView: {
     backgroundColor: Colors.lighter,
