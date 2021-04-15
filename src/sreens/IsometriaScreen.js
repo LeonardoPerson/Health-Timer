@@ -20,7 +20,7 @@ import Sound from 'react-native-sound'
 ////////////////////////////////////////////////////////////////////////////////
 const alert = require('../../assets/sounds/alert.wav')
 
-class AMRAPScreen extends Component {
+class IsometriaScreen extends Component {
   state = {
     goal: 1,
     countDown: 1,
@@ -118,8 +118,7 @@ class AMRAPScreen extends Component {
           <View style={{flex: 1, justifyContent: 'center'}}>   
             <View style={{flex: 1}}>
               <Title 
-                title='AMRAP'  
-                subTitle='As Many Repetitions As Possible'
+                title='ISOMETRIA'  
                 style={{paddingTop: 100}}/>  
             </View>        
             <View style={{flex: 1, justifyContent: 'center'}}>
@@ -160,8 +159,7 @@ class AMRAPScreen extends Component {
     return(      
       <KeyboardAwareScrollView style={styles.container}>      
         <Title 
-          title='AMRAP' 
-          subTitle='As Many Repetitions As Possible'
+          title='ISOMETRIA' 
           style={{paddingTop: 10}}/>  
 
         <Image style={{ alignSelf: 'center'}} source={require('../../assets/btn-engrenagem.png')}/>
@@ -195,7 +193,7 @@ class AMRAPScreen extends Component {
   }
 }
 
-AMRAPScreen.navigationOptions = {
+IsometriaScreen.navigationOptions = {
   header: null
 }
 ////////////////////////////////////////////////////////////////////////////////
@@ -225,4 +223,4 @@ const styles = StyleSheet.create({
   }
 })
 
-export default AMRAPScreen
+export default IsometriaScreen
