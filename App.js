@@ -6,16 +6,18 @@ import {createStackNavigator} from '@react-navigation/stack'
 import HomeScreen from './src/sreens/HomeScreen'
 import EMOMScreen from './src/sreens/EMOMScreen'
 import IsometriaScreen from './src/sreens/IsometriaScreen'
+import AMRAPScreen from './src/sreens/AMRAPScreen'
 
 const Stack = createStackNavigator()
 
 export default AppNavigator = () => {
   return( 
     <NavigationContainer>
-      <Stack.Navigator initialRouteName="Home">
+      <Stack.Navigator initialRouteName="AMRAP">
         <Stack.Screen name="Home" component={HomeScreen} />
         <Stack.Screen name="EMOM" component={EMOMScreen} />
         <Stack.Screen name="Isometria" component={IsometriaScreen} />
+        <Stack.Screen name="AMRAP" component={AMRAPScreen} />
       </Stack.Navigator>    
     </NavigationContainer>
   )
