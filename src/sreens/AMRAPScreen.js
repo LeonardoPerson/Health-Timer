@@ -27,7 +27,8 @@ class AMRAPScreen extends Component {
     time: '2',
     isRunning: false,
     countDownValue: 0,
-    count: 0
+    count: 0,
+    repetitions: 0
   }
 
   componentDidMount(){
@@ -90,6 +91,20 @@ class AMRAPScreen extends Component {
     }
   }
 
+  decrement = () => {
+    if(this.state.repetitions > 0){
+      this.setState({
+        repetitions: this.state.repetitions - 1
+      })
+    }
+  }
+
+  increment = () => {
+    this.setState({
+      repetitions: this.state.repetitions - 1
+    })
+  }
+
   render(){
     if(this.state.isRunning){
       const percMinute = parseInt(((this.state.count % 60) / 60)*100)
@@ -98,27 +113,44 @@ class AMRAPScreen extends Component {
         <BackgroundProgress percentage={percMinute}>
           <View style={{flex: 1, justifyContent: 'center'}}>   
             <View style={{flex: 1}}>
-            <Title 
-            title='AMRAP' 
-            subTitle='As Many Repetitions As Possible' 
-            style={{paddingTop: 100}}/>  
+              <Title 
+                title='AMRAP' 
+                subTitle='As Many Repetitions As Possible' 
+                style={{paddingTop: 100}}/>  
             </View>        
+            <View>
+              <Time time={10} type='text2'/>
+              <Text>Por repetição</Text>
+            </View>
+            <View>
+              <Text>10</Text>
+              <Text>Por repetição</Text>
+            </View>
             <View style={{flex: 1, justifyContent: 'center'}}>
               <Time time = {this.state.count} />
-              <ProgressBar percentage={percTime}/>
+                <ProgressBar percentage={percTime}/>
               <Time time = {parseInt(this.state.time)*60-this.state.count} type='text2' appendedText={' restantes'}/> 
             </View>
             <View style={{flex: 1, justifyContent: 'flex-end'}}>
-            {
-              this.state.countDownValue > 0 ?
-              <Text style={styles.countdown}>{this.state.countDownValue}</Text>  
-              :
-              null
-            }
+              {
+                this.state.countDownValue > 0 ?
+                <Text style={styles.countdown}>{this.state.countDownValue}</Text>  
+                :
+                <View style={{flexDirection: 'row', justifyContent: 'space-evenly'}}>
+                  <TouchableOpacity onPress={this.decrement}>
+                    <Text style={styles.countdown}>-</Text>
+                  </TouchableOpacity>
+                  <Text style={styles.countdown}>{this.state.repetitions}</Text>
+                  <TouchableOpacity onPress={this.increment}>
+                    <Text style={styles.countdown}>+</Text>
+                  </TouchableOpacity>
+                  </View>
+              }
+              
               <TouchableOpacity style={{ alignSelf: 'center', alignContent: 'flex-end'}} onPress={()=> this.stop()}>
                 <Image source={require('../../assets/btn-stop.png')}/>
               </TouchableOpacity>
-              </View>        
+            </View>        
           </View>
         </BackgroundProgress>
       )

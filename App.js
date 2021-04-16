@@ -13,7 +13,7 @@ const Stack = createStackNavigator()
 export default AppNavigator = () => {
   return( 
     <NavigationContainer>
-      <Stack.Navigator initialRouteName="AMRAP">
+      <Stack.Navigator initialRouteName="Home">
         <Stack.Screen name="Home" component={HomeScreen} />
         <Stack.Screen name="EMOM" component={EMOMScreen} />
         <Stack.Screen name="Isometria" component={IsometriaScreen} />
