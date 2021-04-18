@@ -101,7 +101,7 @@ class AMRAPScreen extends Component {
 
   increment = () => {
     this.setState({
-      repetitions: this.state.repetitions - 1
+      repetitions: this.state.repetitions + 1
     })
   }
 
@@ -109,6 +109,8 @@ class AMRAPScreen extends Component {
     if(this.state.isRunning){
       const percMinute = parseInt(((this.state.count % 60) / 60)*100)
       const percTime = parseInt(((this.state.count)/60 / parseInt(this.state.time))*100)
+      const media = this.state.repetitions > 0 ? this.state.count / this.state.repetitions : 0
+      const estimated = media > 0 ? Math.floor((parseInt(this.state.time)*60)/media) : 0
       return(
         <BackgroundProgress percentage={percMinute}>
           <View style={{flex: 1, justifyContent: 'center'}}>   
@@ -117,15 +119,22 @@ class AMRAPScreen extends Component {
                 title='AMRAP' 
                 subTitle='As Many Repetitions As Possible' 
                 style={{paddingTop: 100}}/>  
-            </View>        
-            <View>
-              <Time time={10} type='text2'/>
-              <Text>Por repetição</Text>
-            </View>
-            <View>
-              <Text>10</Text>
-              <Text>Por repetição</Text>
-            </View>
+            </View> 
+            {this.state.repetitions > 0 ? 
+              <View style={{flexDirection: 'row'}}>
+                <View style={{flex: 1}}>
+                  <Time time={media} type='text3'/>
+                  <Text style={styles.subTitle}>Por repetição</Text>
+                </View>
+                <View style={{flex: 1}}>
+                  <Text style={styles.count}>{estimated}</Text>
+                  <Text style={styles.subTitle}>repetições</Text>
+                </View>
+              </View> 
+              :
+              null
+            }
+
             <View style={{flex: 1, justifyContent: 'center'}}>
               <Time time = {this.state.count} />
                 <ProgressBar percentage={percTime}/>
@@ -221,6 +230,17 @@ const styles = StyleSheet.create({
       fontSize: 100,
       color: 'white',
       textAlign: 'center'
+  },
+  count: {
+    fontFamily: 'Ubuntu-Bold',
+    fontSize: 24,
+    color: 'white',
+    textAlign: 'center'
+  },
+  subTitle: {
+    fontFamily: 'Ubuntu-Bold',
+    fontSize: 11,
+    textAlign: 'center'
   }
 })
 
