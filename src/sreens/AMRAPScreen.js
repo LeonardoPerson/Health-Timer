@@ -25,6 +25,7 @@ class AMRAPScreen extends Component {
     alerts: [0, 15],
     countDown: 1,
     time: '2',
+    paused: false,
     isRunning: false,
     countDownValue: 0,
     count: 0,
@@ -48,26 +49,47 @@ class AMRAPScreen extends Component {
       }
     }
   }
-  
+
   /*
-  componentWillUnmount(){
-    
+  componentWillUnmount(){    
   }*/
+
+  restart = () => {
+    if(this.state.paused){
+      clearInterval(this.countTimer)
+      clearInterval(this.countDownTimer)
+      this.play()
+    }    
+  }
+
+  back = () => {
+    if(this.state.paused || !this.state.isRunning){
+      clearInterval(this.countTimer)
+      clearInterval(this.countDownTimer)
+      this.props.navigation.goBack()
+    }
+  }
+
   stop = () => {
-    clearInterval(this.countDownTimer)
-    clearInterval(this.countTimer)
+    //clearInterval(this.countDownTimer)
+    //clearInterval(this.countTimer)
     this.setState({
-      isRunning: false
+      paused: !this.state.paused
     })
   }
   
   play = () => {
     this.setState({
+      paused: false,
+      repetitions: 0,
       count: 0,
       countDownValue: this.state.countDown === 1 ? 5 : 0
     })
     this.setState({isRunning: true})
     const count = () => {
+      if(this.state.paused){
+        return
+      }
       this.setState({count: this.state.count + 1}, () => {
         this.playAlert()     
         if(this.state.count === parseInt(this.state.time)*60){
@@ -78,6 +100,9 @@ class AMRAPScreen extends Component {
     if(this.state.countDown === 1){
       this.alert.play() 
       this.countDownTimer = setInterval(() => {  
+        if(this.state.paused){
+          return
+        }
         this.alert.play()     
         this.setState({countDownValue: this.state.countDownValue - 1}, () => {
           if(this.state.countDownValue === 0){
@@ -111,6 +136,7 @@ class AMRAPScreen extends Component {
       const percTime = parseInt(((this.state.count)/60 / parseInt(this.state.time))*100)
       const media = this.state.repetitions > 0 ? this.state.count / this.state.repetitions : 0
       const estimated = media > 0 ? Math.floor((parseInt(this.state.time)*60)/media) : 0
+      const opacity = !this.state.paused ? 0.6 : 1
       return(
         <BackgroundProgress percentage={percMinute}>
           <View style={{flex: 1, justifyContent: 'center'}}>   
@@ -153,12 +179,24 @@ class AMRAPScreen extends Component {
                   <TouchableOpacity onPress={this.increment}>
                     <Text style={styles.countdown}>+</Text>
                   </TouchableOpacity>
-                  </View>
+                </View>
               }
               
-              <TouchableOpacity style={{ alignSelf: 'center', alignContent: 'flex-end'}} onPress={()=> this.stop()}>
-                <Image source={require('../../assets/btn-stop.png')}/>
-              </TouchableOpacity>
+              <View style={{flexDirection: 'row', justifyContent: 'space-evenly'}}>
+                <TouchableOpacity style={{ alignSelf: 'center', alignContent: 'flex-end'}} onPress={()=> this.back()}>
+                  <Image style={{opacity}} source={require('../../assets/backarrow.png')}/>
+                </TouchableOpacity>
+                <TouchableOpacity style={{ alignSelf: 'center', alignContent: 'flex-end'}} onPress={()=> this.stop()}>
+                  {this.state.paused? 
+                    <Image source={require('../../assets/btn-play.png')}/>
+                    :
+                    <Image source={require('../../assets/btn-stop.png')}/>
+                  }
+                </TouchableOpacity>
+                <TouchableOpacity style={{ alignSelf: 'center', alignContent: 'flex-end'}} onPress={()=> this.restart()}>
+                  <Image style={{opacity}} source={require('../../assets/restart2.png')}/>
+                </TouchableOpacity>
+              </View>
             </View>        
           </View>
         </BackgroundProgress>
@@ -193,9 +231,14 @@ class AMRAPScreen extends Component {
         <Text style={styles.label}>Quantos minutos:</Text>
         <TextInput style={styles.input} keyboardType='numeric' value={this.state.time} onChangeText={text => this.setState({time: text})}/>
         <Text style={styles.label}>minutos</Text>
-        <TouchableOpacity style={{ alignSelf: 'center'}} onPress={()=> this.play()}>
-          <Image source={require('../../assets/btn-play.png')}/>
-        </TouchableOpacity>
+        <View style={{flexDirection: 'row', justifyContent: 'space-evenly'}}>
+          <TouchableOpacity style={{ alignSelf: 'center', alignContent: 'flex-end'}} onPress={()=> this.back()}>
+            <Image source={require('../../assets/backarrow.png')}/>
+          </TouchableOpacity>
+          <TouchableOpacity style={{ alignSelf: 'center'}} onPress={()=> this.play()}>
+            <Image source={require('../../assets/btn-play.png')}/>
+          </TouchableOpacity>        
+        </View>
         <Text>Testar</Text>
       </KeyboardAwareScrollView>
     
