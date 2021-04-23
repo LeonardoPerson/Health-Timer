@@ -12,6 +12,8 @@ target 'CalisTimer' do
 
   pod 'RNSound', :path => '../node_modules/react-native-sound'
 
+  pod 'react-native-keep-awake', :path => '../node_modules/react-native-keep-awake'
+
   target 'CalisTimerTests' do
     inherit! :complete
     # Pods for testing

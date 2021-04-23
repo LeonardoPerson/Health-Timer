@@ -16,6 +16,7 @@ import Time from '../components/Time'
 import ProgressBar from '../components/ProgressBar'
 import BackgroundProgress from '../components/BackgroundProgress'
 import Sound from 'react-native-sound'
+import KeepAwake from 'react-native-keep-awake'
 
 ////////////////////////////////////////////////////////////////////////////////
 const alert = require('../../assets/sounds/alert.wav')
@@ -115,7 +116,8 @@ class IsometriaScreen extends Component {
       const opacity = !this.state.paused ? 0.2 : 1
       return(
         <BackgroundProgress percentage={percMinute}>
-          <View style={{flex: 1, justifyContent: 'center'}}>   
+          <View style={{flex: 1, justifyContent: 'center'}}> 
+            <KeepAwake />  
             <View style={{flex: 1}}>
               <Title 
                 title='ISOMETRIA'  
