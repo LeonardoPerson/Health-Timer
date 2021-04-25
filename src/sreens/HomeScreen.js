@@ -8,7 +8,8 @@ const HomeScreen = props => {
       <Text style={styles.logo}>Health Timer</Text>
       <Button style={styles.btn} onPress={() => props.navigation.navigate('EMOM')}>EMOM</Button>
       <Button style={styles.btn} onPress={() => props.navigation.navigate('AMRAP')}>AMRAP</Button>
-      <Button style={styles.btn} onPress={() => props.navigation.navigate('Isometria')}>Isometria</Button>      
+      <Button style={styles.btn} onPress={() => props.navigation.navigate('Isometria')}>Isometria</Button>  
+      <Button style={styles.btn} onPress={() => props.navigation.navigate('About')}>About</Button>      
     </View>
   )
 }

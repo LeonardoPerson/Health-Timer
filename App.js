@@ -7,6 +7,7 @@ import HomeScreen from './src/sreens/HomeScreen'
 import EMOMScreen from './src/sreens/EMOMScreen'
 import IsometriaScreen from './src/sreens/IsometriaScreen'
 import AMRAPScreen from './src/sreens/AMRAPScreen'
+import AboutScreen from './src/sreens/AboutScreen'
 
 const Stack = createStackNavigator()
 
@@ -18,6 +19,7 @@ export default AppNavigator = () => {
         <Stack.Screen name="EMOM" component={EMOMScreen} />
         <Stack.Screen name="Isometria" component={IsometriaScreen} />
         <Stack.Screen name="AMRAP" component={AMRAPScreen} />
+        <Stack.Screen name="About" component={AboutScreen} />
       </Stack.Navigator>    
     </NavigationContainer>
   )
