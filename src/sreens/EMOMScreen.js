@@ -1,5 +1,6 @@
 import React, {Component} from 'react'
 import {
+  Platform,
   View,
   keyboard,
   ScrollView, 
@@ -161,12 +162,14 @@ class EMOMScreen extends Component {
       )
       
     }
+    const behavior = Platform.OS === 'ios' ? 'height' : 'padding' //'padding'
+    const paddingTop = Platform === 'ios'? this.state.keyboardIsVisible ? 20 : 200 : 50
     return(      
-      <KeyboardAwareScrollView style={styles.container}>      
+      <KeyboardAwareScrollView style={styles.container} behavior={behavior}>      
         <Title 
           title='EMON' 
           subTitle='Every Minute On the Minute' 
-          style={{paddingTop: 10}}/>  
+          style={{paddingTop}}/>  
 
         <Image style={{ alignSelf: 'center'}} source={require('../../assets/btn-engrenagem.png')}/>
         
