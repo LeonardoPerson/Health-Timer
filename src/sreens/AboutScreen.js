@@ -10,8 +10,7 @@ const AboutScreen = props => {
     <View style={styles.container}>
       <Text style={styles.logo}>Health Timer</Text>
       <Text style={styles.description}>
-        Este aplicativo foi construído com o objetivo de cronometrar 
-        atividades físicas.
+        This app was built the goal of timing physical activities.
       </Text>
       <TouchableOpacity onPress={back}>
         <Image source={require('../../assets/backarrow.png')}/>

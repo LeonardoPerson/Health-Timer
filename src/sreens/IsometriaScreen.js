@@ -1,24 +1,20 @@
 import React, {Component} from 'react'
 import {
   View,
-  keyboard,
-  ScrollView, 
   Text, 
   StyleSheet, 
   Image, 
-  TextInput,
-  KeyboardAvoidingView} from 'react-native'
+  TextInput
+} from 'react-native'
 import { TouchableOpacity } from 'react-native-gesture-handler'
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view'
 import Select from '../components/Select'
 import Title from '../components/Title'
 import Time from '../components/Time'
-import ProgressBar from '../components/ProgressBar'
 import BackgroundProgress from '../components/BackgroundProgress'
 import Sound from 'react-native-sound'
 import KeepAwake from 'react-native-keep-awake'
 
-////////////////////////////////////////////////////////////////////////////////
 const alert = require('../../assets/sounds/alert.wav')
 
 class IsometriaScreen extends Component {
@@ -49,10 +45,10 @@ class IsometriaScreen extends Component {
   /*
   componentWillUnmount(){    
   }*/
-
   /*if(this.state.count === parseInt(this.state.time)){
           clearInterval(this.countTimer)
-        }*/
+    }*/
+
   restart = () => {
     if(this.state.paused){
       clearInterval(this.countTimer)
@@ -111,7 +107,6 @@ class IsometriaScreen extends Component {
   render(){
     if(this.state.isRunning){
       const percMinute = this.state.time === '0' ? 0 : parseInt(((this.state.count) / parseInt(this.state.time))*100)
-      //const percTime = parseInt(((this.state.count)/60 / parseInt(this.state.time))*100)
       const restante = parseInt(this.state.time)>=this.state.count ? parseInt(this.state.time)-this.state.count : 0
       const opacity = !this.state.paused ? 0.2 : 1
       return(
@@ -126,7 +121,7 @@ class IsometriaScreen extends Component {
             <View style={{flex: 1, justifyContent: 'center'}}>
               <Time time = {this.state.count} />
               {
-                this.state.goal === 1 ? <Time time = {restante} type='text2' appendedText={' restantes'}/> 
+                this.state.goal === 1 ? <Time time = {restante} type='text2' appendedText={' remaining'}/> 
                 : null
               }
               </View>
@@ -167,16 +162,16 @@ class IsometriaScreen extends Component {
         <Image style={{ alignSelf: 'center'}} source={require('../../assets/btn-engrenagem.png')}/>
         
         <Select 
-          label='Objetivo:'
+          label='Goal:'
           current={this.state.goal}
           options={[
-            {id: 0,  label: 'livre'}, 
-            {id: 1, label: 'bater tempo'}
+            {id: 0,  label: 'free'}, 
+            {id: 1, label: 'reach time'}
           ]}
           onSelect={opt => this.setState({goal: opt})}/>
         {this.state.goal !== 0 ?
           <React.Fragment>
-            <Text style={styles.label}>Quantos segundos:</Text>
+            <Text style={styles.label}>How many seconds:</Text>
             <TextInput style={styles.input} keyboardType='numeric' value={this.state.time} onChangeText={text => this.setState({time: text})}/>
           </React.Fragment>
           : null
@@ -189,8 +184,7 @@ class IsometriaScreen extends Component {
             <Image source={require('../../assets/btn-play.png')}/>
           </TouchableOpacity>        
         </View>
-      </KeyboardAwareScrollView>
-    
+      </KeyboardAwareScrollView>    
     )
   }
 }
@@ -198,7 +192,7 @@ class IsometriaScreen extends Component {
 IsometriaScreen.navigationOptions = {
   header: null
 }
-////////////////////////////////////////////////////////////////////////////////
+
 const styles = StyleSheet.create({
   container: {
     flex: 1, 

@@ -1,5 +1,5 @@
 import React from 'react'
-import {View, Text, StyleSheet} from 'react-native'
+import {Text, StyleSheet} from 'react-native'
 
 const Timer = props => {
   const minutes = parseInt(props.time / 60)
@@ -14,7 +14,6 @@ const Timer = props => {
   return (
     <Text style={styles[props.type ? props.type : 'text']}>{format(minutes)}:{format(seconds)}{props.appendedText}</Text>
   )
-
 }
 
 const styles = StyleSheet.create({

@@ -1,13 +1,11 @@
 import React, {Component} from 'react'
 import {
   View,
-  keyboard,
-  ScrollView, 
   Text, 
   StyleSheet, 
   Image, 
-  TextInput,
-  KeyboardAvoidingView} from 'react-native'
+  TextInput
+} from 'react-native'
 import { TouchableOpacity } from 'react-native-gesture-handler'
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view'
 import Select from '../components/Select'
@@ -18,7 +16,6 @@ import BackgroundProgress from '../components/BackgroundProgress'
 import Sound from 'react-native-sound'
 import KeepAwake from 'react-native-keep-awake'
 
-////////////////////////////////////////////////////////////////////////////////
 const alert = require('../../assets/sounds/alert.wav')
 
 class AMRAPScreen extends Component {
@@ -152,11 +149,11 @@ class AMRAPScreen extends Component {
               <View style={{flexDirection: 'row'}}>
                 <View style={{flex: 1}}>
                   <Time time={media} type='text3'/>
-                  <Text style={styles.subTitle}>Por repetição</Text>
+                  <Text style={styles.subTitle}>By repetitions</Text>
                 </View>
                 <View style={{flex: 1}}>
                   <Text style={styles.count}>{estimated}</Text>
-                  <Text style={styles.subTitle}>repetições</Text>
+                  <Text style={styles.subTitle}>Repetitions</Text>
                 </View>
               </View> 
               :
@@ -166,7 +163,7 @@ class AMRAPScreen extends Component {
             <View style={{flex: 1, justifyContent: 'center'}}>
               <Time time = {this.state.count} />
                 <ProgressBar percentage={percTime}/>
-              <Time time = {parseInt(this.state.time)*60-this.state.count} type='text2' appendedText={' restantes'}/> 
+              <Time time = {parseInt(this.state.time)*60-this.state.count} type='text2' appendedText={' remaining'}/> 
             </View>
             <View style={{flex: 1, justifyContent: 'flex-end'}}>
               {
@@ -215,7 +212,7 @@ class AMRAPScreen extends Component {
         <Image style={{ alignSelf: 'center'}} source={require('../../assets/btn-engrenagem.png')}/>
         
         <Select 
-          label='Alertas:'
+          label='Alerts:'
           current={this.state.alerts}
           options={[
             {id: 0,  label: '0s'}, 
@@ -225,14 +222,14 @@ class AMRAPScreen extends Component {
           onSelect={opt => this.setState({alerts: opt})}/>
 
         <Select 
-          label='Contagem Regressiva:'
+          label='Countdown:'
           current={this.state.countDown}
-          options={[{id: 1, label: 'sim'}, {id: 0, label: 'não'}]}
+          options={[{id: 1, label: 'yes'}, {id: 0, label: 'no'}]}
           onSelect={opt => this.setState({countDown: opt})}/>
 
-        <Text style={styles.label}>Quantos minutos:</Text>
+        <Text style={styles.label}>How many minutes:</Text>
         <TextInput style={styles.input} keyboardType='numeric' value={this.state.time} onChangeText={text => this.setState({time: text})}/>
-        <Text style={styles.label}>minutos</Text>
+        <Text style={styles.label}>minutes</Text>
         <View style={{flexDirection: 'row', justifyContent: 'space-evenly'}}>
           <TouchableOpacity style={{ alignSelf: 'center', alignContent: 'flex-end'}} onPress={()=> this.back()}>
             <Image source={require('../../assets/backarrow.png')}/>
@@ -241,7 +238,6 @@ class AMRAPScreen extends Component {
             <Image source={require('../../assets/btn-play.png')}/>
           </TouchableOpacity>        
         </View>
-        <Text>Testar</Text>
       </KeyboardAwareScrollView>
     
     )
