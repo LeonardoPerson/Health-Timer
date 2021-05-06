@@ -1,5 +1,6 @@
 # Health-Timer
 This is a timer for physical activities done in react native. </br>
+Classes were used instead of hooks.</br>
 <img src="src/sreens/ScreenImage/home.png" height="500"/></br>
 
 EMON - it's a simple minute counter.</br>
